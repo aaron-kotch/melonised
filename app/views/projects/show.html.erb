@@ -1,0 +1,16 @@
+<h1><%= @project.name %></h1>
+<p><%= @epoi_id %></p>
+
+<button><a href="<%= edit_project_path(@project) %>">Edit Project</a></button>
+
+<br><br>
+<h2>Todos</h2>
+<ul>
+  <% @todos.each do |todo| %>
+    <li>
+      <div class="item">
+        <%= link_to todo.name, todo_path(todo) %>
+      </div>
+    </li>
+  <% end %>
+</ul>
