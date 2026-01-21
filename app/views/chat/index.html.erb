@@ -1,0 +1,37 @@
+<!-- render main, with content inside -->
+<%= render "layouts/main" do %>
+  <div class="flex flex-col h-full w-full items-center">
+    <div class="mb-6 shrink-0 w-2xl">
+      <h1 class="text-lg font-semibold">Chat with Melonaaron</h1>
+      <p class="text-gray-600 text-sm">Ask me anything!</p>
+    </div>
+
+    <div class="flex-1 min-h-0 flex flex-col items-center overflow-y-auto w-full">
+      <%= turbo_stream_from "chat_messages" %>
+
+      <div id="message_content" class="flex-1 w-2xl space-y-4 pr-2">
+        <!-- Chunks will appear here -->
+      </div>
+    </div>
+
+    <div class="shrink-0 pb-4 w-2xl">
+      <%= form_with url: chat_index_path, method: :post, class: "relative", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } do |form| %>
+        
+        <%= form.text_field :content, 
+            required: true, 
+            placeholder: "Type something...", 
+            class: "block w-full rounded-full border-0 py-3 pl-5 pr-12 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-0 sm:text-sm sm:leading-6" 
+        %>
+
+        <%= button_tag type: "submit", class: "bg-blue-600 absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-2 text-indigo-600 hover:text-indigo-500 hover:bg-gray-100 transition-colors" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" class="w-4 h-4">
+            <path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.89 28.89 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
+          </svg>
+        <% end %>
+
+      <% end %>
+    </div>
+  </div>
+
+    
+<% end %>

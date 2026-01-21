@@ -79,6 +79,7 @@ GEM
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
     base64 (0.3.0)
+    bcrypt (3.1.21)
     bcrypt_pbkdf (1.1.2)
     bigdecimal (4.0.1)
     bindex (0.8.1)
@@ -107,16 +108,31 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     dotenv (3.2.0)
+    dotenv-rails (3.2.0)
+      dotenv (= 3.2.0)
+      railties (>= 6.1)
     drb (2.2.3)
     ed25519 (1.4.0)
     erb (6.0.1)
     erubi (1.13.1)
     et-orbi (1.4.0)
       tzinfo
+    event_stream_parser (1.0.0)
+    faraday (2.14.0)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-multipart (1.2.0)
+      multipart-post (~> 2.0)
+    faraday-net_http (3.4.2)
+      net-http (~> 0.5)
+    faraday-retry (2.4.0)
+      faraday (~> 2.0)
     ffi (1.17.3-aarch64-linux-gnu)
     ffi (1.17.3-aarch64-linux-musl)
     ffi (1.17.3-arm-linux-gnu)
     ffi (1.17.3-arm-linux-musl)
+    ffi (1.17.3-arm64-darwin)
     ffi (1.17.3-x86_64-linux-gnu)
     ffi (1.17.3-x86_64-linux-musl)
     fugit (1.12.1)
@@ -124,6 +140,10 @@ GEM
       raabro (~> 1.4)
     globalid (1.3.0)
       activesupport (>= 6.1)
+    hotwire-livereload (2.1.1)
+      actioncable (>= 7.0.0)
+      listen (>= 3.0.0)
+      railties (>= 7.0.0)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     image_processing (1.14.0)
@@ -155,6 +175,10 @@ GEM
       zeitwerk (>= 2.6.18, < 3.0)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
+    listen (3.10.0)
+      logger
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
     loofah (2.25.0)
       crass (~> 1.0.2)
@@ -173,6 +197,9 @@ GEM
     minitest (6.0.1)
       prism (~> 1.5)
     msgpack (1.8.0)
+    multipart-post (2.4.1)
+    net-http (0.9.1)
+      uri (>= 0.11.1)
     net-imap (0.6.2)
       date
       net-protocol
@@ -195,6 +222,8 @@ GEM
     nokogiri (1.19.0-arm-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.19.0-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.19.0-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.19.0-x86_64-linux-gnu)
       racc (~> 1.4)
@@ -261,6 +290,9 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.3.1)
+    rb-fsevent (0.11.2)
+    rb-inotify (0.11.1)
+      ffi (~> 1.0)
     rdoc (7.1.0)
       erb
       psych (>= 4.0.0)
@@ -301,6 +333,17 @@ GEM
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
+    ruby_llm (1.11.0)
+      base64
+      event_stream_parser (~> 1)
+      faraday (>= 1.10.0)
+      faraday-multipart (>= 1)
+      faraday-net_http (>= 1)
+      faraday-retry (>= 1)
+      marcel (~> 1.0)
+      ruby_llm-schema (~> 0.2.1)
+      zeitwerk (~> 2)
+    ruby_llm-schema (0.2.5)
     rubyzip (3.2.2)
     securerandom (0.4.1)
     selenium-webdriver (4.39.0)
@@ -329,6 +372,7 @@ GEM
     sqlite3 (2.9.0-aarch64-linux-musl)
     sqlite3 (2.9.0-arm-linux-gnu)
     sqlite3 (2.9.0-arm-linux-musl)
+    sqlite3 (2.9.0-arm64-darwin)
     sqlite3 (2.9.0-x86_64-linux-gnu)
     sqlite3 (2.9.0-x86_64-linux-musl)
     sshkit (1.25.0)
@@ -341,9 +385,19 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.2.0)
+    tailwindcss-rails (4.4.0)
+      railties (>= 7.0.0)
+      tailwindcss-ruby (~> 4.0)
+    tailwindcss-ruby (4.1.18)
+    tailwindcss-ruby (4.1.18-aarch64-linux-gnu)
+    tailwindcss-ruby (4.1.18-aarch64-linux-musl)
+    tailwindcss-ruby (4.1.18-arm64-darwin)
+    tailwindcss-ruby (4.1.18-x86_64-linux-gnu)
+    tailwindcss-ruby (4.1.18-x86_64-linux-musl)
     thor (1.5.0)
     thruster (0.1.17)
     thruster (0.1.17-aarch64-linux)
+    thruster (0.1.17-arm64-darwin)
     thruster (0.1.17-x86_64-linux)
     timeout (0.6.0)
     tsort (0.2.0)
@@ -377,16 +431,20 @@ PLATFORMS
   aarch64-linux-musl
   arm-linux-gnu
   arm-linux-musl
+  arm64-darwin-24
   x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   brakeman
   bundler-audit
   capybara
   debug
+  dotenv-rails
+  hotwire-livereload (~> 2.1)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
@@ -395,12 +453,14 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 8.1.2)
   rubocop-rails-omakase
+  ruby_llm (~> 1.11)
   selenium-webdriver
   solid_cable
   solid_cache
   solid_queue
   sqlite3 (>= 2.1)
   stimulus-rails
+  tailwindcss-rails (~> 4.4)
   thruster
   turbo-rails
   tzinfo-data

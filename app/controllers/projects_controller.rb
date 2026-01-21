@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  # allow_unauthenticated_access only: %i[ index ]
+
   def index
     @projects = Project.all
     @epoi = Project.all

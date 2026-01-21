@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <title><%= content_for(:title) || "Melonaaron" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -23,12 +23,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <% if flash[:notice] %>
-      <p class="flash">
-        <%= flash[:notice] %>
-      </p>
-    <% end %>
+  <body class="h-full flex flex-col">
+    <%= render "shared/toast" %>
+    <%= render "layouts/header" if current_user %>
+
     <%= yield %>
+
   </body>
 </html>

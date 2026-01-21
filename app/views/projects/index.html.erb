@@ -1,12 +1,15 @@
-<h1>Projects</h1>
+<!-- render main, with content inside -->
+<%= render "layouts/main" do %>
+  <h1>Projects</h1>
 
-<ul>
-  <% @epoi.each do |poi| %>
-    <li>
-      <div class="item">
-        <%= link_to poi.name, project_path(poi, epoiId: "epoingg") %>
-        <%= button_to "Delete", project_path(poi), method: :delete, data: { confirm: "Are you sure?" } %>
-      </div>
-    </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @epoi.each do |poi| %>
+      <li>
+        <div class="item">
+          <%= link_to poi.name, project_path(poi, epoiId: "epoingg") %>
+          <%= button_to "Delete", project_path(poi), method: :delete, data: { confirm: "Are you sure?" } %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
