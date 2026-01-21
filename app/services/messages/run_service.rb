@@ -1,3 +1,5 @@
+require "ostruct"
+
 module Messages
   class RunService
     def self.call(raw_text, &block)
@@ -10,6 +12,12 @@ module Messages
 
     def call(&block)
       chat = RubyLLM.chat(model: "claude-haiku-4-5")
+
+      chat.with_tools(
+        Tools::Wallet::SearchWallet,
+        Tools::Wallet::GetCoins,
+        Tools::Wallet::GetTrendings
+      )
 
       # Ask a question
       chat.ask @raw_text do |chunk|

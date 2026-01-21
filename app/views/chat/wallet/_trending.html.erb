@@ -1,0 +1,30 @@
+<div class="w-full max-w-2xl mx-auto flex flex-col gap-4">
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div class="p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">Trending Search</h2>
+      
+      <div class="space-y-4">
+        <% if local_assigns[:data].present? && data["coins"].present? %>
+          <% data["coins"].each do |item_wrapper| %>
+            <% coin = item_wrapper["item"] %>
+            <div class="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-shadow">
+              <div class="flex items-center space-x-4">
+                <img src="<%= coin["small"] %>" alt="<%= coin["name"] %>" class="w-10 h-10 rounded-full">
+                <div>
+                  <div class="font-bold text-gray-900"><%= coin["name"] %></div>
+                  <div class="text-sm text-gray-500"><%= coin["symbol"] %></div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-sm font-medium text-gray-900">Rank #<%= coin["market_cap_rank"] %></div>
+                <div class="text-xs text-gray-500"><%= coin["data"]["price"] %></div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-gray-500">No trending data available.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

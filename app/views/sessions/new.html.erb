@@ -2,6 +2,16 @@
 
   <div id="flash"></div>
 
+  <div class="flex gap-2 mb-8">
+    <% colors = ["bg-blue-600", "bg-orange-600", "bg-green-600", "bg-red-600", "bg-teal-600"] %>
+    <% "melon".each_char.with_index do |char, index| %>
+      <div class="w-10 h-10 rounded-full <%= colors[index % colors.length] %> flex justify-center items-center text-xl font-bold text-white">
+        <%= char %>
+      </div>
+    <% end %>
+
+  </div>
+
   <%= form_with url: session_path, class: "w-full max-w-sm space-y-4" do |form| %>
     <%= render "shared/input", 
       form: form, 

@@ -1,0 +1,35 @@
+<div class="w-full max-w-2xl mx-auto mb-4 grid grid-cols-3 gap-3">
+  <%= button_to get_wallet_path, method: :post, class: "w-full text-left", id: "btn-wallet" do %>
+    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm hover:bg-gray-50 hover:border-indigo-300 transition-all cursor-pointer flex items-center space-x-3">
+      <div class="p-2 bg-indigo-50 rounded-full text-indigo-600">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
+        </svg>
+      </div>
+      <span class="font-medium text-gray-700">Wallet</span>
+    </div>
+  <% end %>
+
+  <%= button_to get_trending_path, method: :post, class: "w-full text-left", id: "btn-trending" do %>
+    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm hover:bg-gray-50 hover:border-indigo-300 transition-all cursor-pointer flex items-center space-x-3">
+      <div class="p-2 bg-pink-50 rounded-full text-pink-600">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.047 8.287 8.287 0 009 9.601a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.468 5.99 5.99 0 00-1.925 3.547 5.975 5.975 0 01-2.133-1.001A3.75 3.75 0 0012 18z" />
+        </svg>
+      </div>
+      <span class="font-medium text-gray-700">Trending</span>
+    </div>
+  <% end %>
+
+  <%= button_to get_coins_path, method: :post, class: "w-full text-left", id: "btn-coins" do %>
+    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm hover:bg-gray-50 hover:border-indigo-300 transition-all cursor-pointer flex items-center space-x-3">
+      <div class="p-2 bg-yellow-50 rounded-full text-yellow-600">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+        </svg>
+      </div>
+      <span class="font-medium text-gray-700">Coins</span>
+    </div>
+  <% end %>
+</div>

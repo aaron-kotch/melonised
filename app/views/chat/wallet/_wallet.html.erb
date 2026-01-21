@@ -1,0 +1,109 @@
+<div class="w-full max-w-2xl mx-auto flex flex-col gap-4">
+
+  <div class="w-full max-w-lg">
+    <%= form_with url: get_wallet_path, method: :post, class: "relative flex items-center gap-2", data: { turbo: true } do |form| %>
+      
+      <%= form.text_field :address, 
+          required: true, 
+          placeholder: "Enter token address (0x...)", 
+          class: "block w-full rounded-full border-0 py-2 pl-5 pr-12 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-0 sm:text-sm sm:leading-6" 
+      %>
+
+      <%= button_tag type: "submit", class: "bg-green-600 rounded-full p-2 text-white hover:bg-green-700 transition-colors shrink-0" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+      <% end %>
+
+    <% end %>
+  </div>
+
+  <% if local_assigns[:data].present? && (attrs = data.dig("data", "attributes")) %>
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <!-- Header Section -->
+      <div class="p-6 flex items-start space-x-4">
+        <!-- Icon -->
+        <div class="shrink-0">
+          <% if attrs["image_url"] %>
+            <img src="<%= attrs["image_url"] %>" alt="<%= attrs["name"] %>" class="w-16 h-16 rounded-full p-4 border border-gray-100 shadow-sm object-cover">
+          <% else %>
+            <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500">
+              <span class="text-2xl font-bold"><%= attrs["symbol"]&.first || "?" %></span>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Main Info -->
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-gray-900 truncate">
+              <%= attrs["name"] %> 
+              <span class="text-gray-500 font-medium ml-1 text-base"><%= attrs["symbol"] %></span>
+            </h2>
+            <% if attrs["gt_score"] %>
+              <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                Score: <%= attrs["gt_score"].to_i %>
+              </span>
+            <% end %>
+          </div>
+          
+          <!-- Address -->
+          <div class="mt-2 flex items-center">
+            <code class="text-xs text-gray-500 bg-gray-50 px-2 py-1 rounded border border-gray-200 break-all">
+              <%= attrs["address"] %>
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-3 divide-x divide-gray-100 border-t border-gray-100 bg-gray-50/50">
+        <div class="p-4 text-center">
+          <span class="block text-xs font-medium text-gray-500 uppercase tracking-wide">Holders</span>
+          <span class="block text-lg font-semibold text-gray-900 mt-1">
+            <%= number_with_delimiter(attrs.dig("holders", "count")) if attrs.dig("holders", "count") %>
+          </span>
+        </div>
+        <div class="p-4 text-center">
+          <span class="block text-xs font-medium text-gray-500 uppercase tracking-wide">Decimals</span>
+          <span class="block text-lg font-semibold text-gray-900 mt-1"><%= attrs["decimals"] %></span>
+        </div>
+        <div class="p-4 text-center">
+          <span class="block text-xs font-medium text-gray-500 uppercase tracking-wide">Type</span>
+          <span class="block text-lg font-semibold text-gray-900 mt-1"><%= data.dig("data", "type")&.humanize %></span>
+        </div>
+      </div>
+      
+      <!-- Description -->
+      <% if attrs["description"].present? %>
+        <div class="px-6 py-4 border-t border-gray-100">
+          <h3 class="text-sm font-medium text-gray-900 mb-2">About</h3>
+          <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed">
+            <%= attrs["description"] %>
+          </p>
+        </div>
+      <% end %>
+
+      <!-- Links Footer -->
+      <div class="bg-gray-50 px-6 py-3 flex items-center justify-end space-x-6 border-t border-gray-200">
+        <% if attrs["websites"]&.any? %>
+          <%= link_to "Website", attrs["websites"].first, target: "_blank", class: "text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors" %>
+        <% end %>
+        <% if attrs["twitter_handle"].present? %>
+          <%= link_to "Twitter", "https://twitter.com/#{attrs["twitter_handle"]}", target: "_blank", class: "text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors" %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <!-- Initial Empty State -->
+    <div class="rounded-xl border-2 border-dashed border-gray-200 p-8 text-center bg-gray-50/50">
+      <div class="mx-auto h-12 w-12 text-gray-300">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 0 1 9-9" />
+        </svg>
+      </div>
+      <h3 class="mt-2 text-sm font-semibold text-gray-900">No token data</h3>
+      <p class="mt-1 text-sm text-gray-500">Click "Get Wallet" to fetch token information.</p>
+    </div>
+  <% end %>
+</div>

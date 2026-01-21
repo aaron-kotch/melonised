@@ -35,4 +35,50 @@ class ChatController < ApplicationController
       format.html { redirect_to chat_index_path }
     end
   end
+
+  def get_wallet
+    data = CoinGeckoClient.get_wallet(params[:address])
+    puts "Wallet data: #{data.as_json}"
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          "wallet_content",
+          partial: "chat/wallet/wallet",
+          locals: { data: data }
+        )
+      end
+      format.html { redirect_to chat_index_path }
+    end
+  end
+
+  def get_coins
+    data = CoinGeckoClient.get_coins
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          "wallet_content",
+          partial: "chat/wallet/coins",
+          locals: { data: data }
+        )
+      end
+      format.html { redirect_to chat_index_path }
+    end
+  end
+
+  def get_trending
+    data = CoinGeckoClient.get_trending
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          "wallet_content",
+          partial: "chat/wallet/trending",
+          locals: { data: data }
+        )
+      end
+      format.html { redirect_to chat_index_path }
+    end
+  end
 end
