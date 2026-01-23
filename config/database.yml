@@ -24,6 +24,7 @@ test:
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
   primary: &primary_production
+    database: app_production
     adapter: postgresql
     encoding: unicode
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
