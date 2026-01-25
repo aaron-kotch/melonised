@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+.turbo-progress-bar {
+  visibility: hidden;
+  display: none !important;
+}
+

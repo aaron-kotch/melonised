@@ -1,0 +1,15 @@
+<div
+  class="w-full p-4 flex justify-between border-b border-gray-200 items-center"
+>
+  <!-- app name title -->
+  <div class="text-xl font-bold">
+    <%= link_to "melonised.", root_path, class: "hover:underline" %>
+  </div>
+
+  <div class="flex gap-4 items-center">
+    <span class="font-normal"><%= current_user.email_address %></span>
+    <%= button_to session_path, method: :delete, class: "flex w-8 h-8
+    bg-amber-300 rounded-full hover:bg-amber-400 transition-colors
+    cursor-pointer", title: "Logout" do %> <% end %>
+  </div>
+</div>

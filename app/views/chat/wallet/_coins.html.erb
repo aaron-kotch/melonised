@@ -1,0 +1,27 @@
+<div class="w-full max-w-2xl mx-auto flex flex-col gap-4">
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div class="p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">Coins List</h2>
+      
+      <div class="overflow-y-auto max-h-[600px]">
+        <% if local_assigns[:data].is_a?(Array) %>
+          <div class="grid grid-cols-1 gap-2">
+            <% data.first(50).each do |coin| %>
+              <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg border border-gray-100">
+                <div class="flex items-center space-x-3">
+                  <img src="<%= coin["image"] %>" alt="<%= coin["name"] %>" class="w-8 h-8 rounded-full">
+                  <div>
+                    <div class="font-medium text-gray-900"><%= coin["name"] %></div>
+                    <div class="text-xs text-gray-500">Current Price: $<%= coin["current_price"] %></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-gray-500">No coins data available.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
