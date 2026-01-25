@@ -24,7 +24,7 @@ class ChatController < ApplicationController
       Turbo::StreamsChannel.broadcast_append_to(
         "chat_messages",
         target: bot_message_id,
-        html: chunk.content
+        html: CGI.escapeHTML(chunk.content)
       )
     end
 
