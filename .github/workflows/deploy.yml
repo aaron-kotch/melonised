@@ -164,7 +164,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           labels: |
-            "service=anonymous-location"
+            "service=melonised"
           tags: |
             "aaronkotch/melonised:latest"
             "aaronkotch/melonised:${{ steps.tag.outputs.tag }}"
