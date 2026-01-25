@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2026_01_25_095659) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -72,23 +69,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_25_095659) do
   end
 
   create_table "models", force: :cascade do |t|
-    t.jsonb "capabilities", default: []
+    t.json "capabilities", default: []
     t.integer "context_window"
     t.datetime "created_at", null: false
     t.string "family"
     t.date "knowledge_cutoff"
     t.integer "max_output_tokens"
-    t.jsonb "metadata", default: {}
-    t.jsonb "modalities", default: {}
+    t.json "metadata", default: {}
+    t.json "modalities", default: {}
     t.datetime "model_created_at"
     t.string "model_id", null: false
     t.string "name", null: false
-    t.jsonb "pricing", default: {}
+    t.json "pricing", default: {}
     t.string "provider", null: false
     t.datetime "updated_at", null: false
-    t.index ["capabilities"], name: "index_models_on_capabilities", using: :gin
+    t.index ["capabilities"], name: "index_models_on_capabilities"
     t.index ["family"], name: "index_models_on_family"
-    t.index ["modalities"], name: "index_models_on_modalities", using: :gin
+    t.index ["modalities"], name: "index_models_on_modalities"
     t.index ["provider", "model_id"], name: "index_models_on_provider_and_model_id", unique: true
     t.index ["provider"], name: "index_models_on_provider"
   end
@@ -121,7 +118,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_25_095659) do
   end
 
   create_table "tool_calls", force: :cascade do |t|
-    t.jsonb "arguments", default: {}
+    t.json "arguments", default: {}
     t.datetime "created_at", null: false
     t.bigint "message_id", null: false
     t.string "name", null: false
