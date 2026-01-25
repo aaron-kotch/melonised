@@ -8,6 +8,11 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+puts "Loading LLM models..."
+RubyLLM.models.load_from_json!
+Model.save_to_database
+puts "Models loaded."
+
 User.find_or_create_by!(email_address: "aaronssikua@gmail.com") do |user|
   user.password = "Psyduck@2049"
 end
