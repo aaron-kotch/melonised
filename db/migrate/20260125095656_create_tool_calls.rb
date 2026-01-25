@@ -5,7 +5,7 @@ class CreateToolCalls < ActiveRecord::Migration[8.1]
       t.string :name, null: false
       t.string :thought_signature
 
-      t.json :arguments, default: {}
+      t.jsonb :arguments, default: {}
 
       t.timestamps
     end

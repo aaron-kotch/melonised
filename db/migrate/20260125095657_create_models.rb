@@ -10,10 +10,10 @@ class CreateModels < ActiveRecord::Migration[8.1]
       t.integer :max_output_tokens
       t.date :knowledge_cutoff
 
-      t.json :modalities, default: {}
-      t.json :capabilities, default: []
-      t.json :pricing, default: {}
-      t.json :metadata, default: {}
+      t.jsonb :modalities, default: {}
+      t.jsonb :capabilities, default: []
+      t.jsonb :pricing, default: {}
+      t.jsonb :metadata, default: {}
 
       t.timestamps
 
@@ -21,8 +21,8 @@ class CreateModels < ActiveRecord::Migration[8.1]
       t.index :provider
       t.index :family
 
-      t.index :capabilities
-      t.index :modalities
+      t.index :capabilities, using: :gin
+      t.index :modalities, using: :gin
     end
 
     # Load models from JSON

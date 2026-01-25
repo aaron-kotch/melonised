@@ -69,23 +69,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_25_095659) do
   end
 
   create_table "models", force: :cascade do |t|
-    t.json "capabilities", default: []
+    t.jsonb "capabilities", default: []
     t.integer "context_window"
     t.datetime "created_at", null: false
     t.string "family"
     t.date "knowledge_cutoff"
     t.integer "max_output_tokens"
-    t.json "metadata", default: {}
-    t.json "modalities", default: {}
+    t.jsonb "metadata", default: {}
+    t.jsonb "modalities", default: {}
     t.datetime "model_created_at"
     t.string "model_id", null: false
     t.string "name", null: false
-    t.json "pricing", default: {}
+    t.jsonb "pricing", default: {}
     t.string "provider", null: false
     t.datetime "updated_at", null: false
-    t.index ["capabilities"], name: "index_models_on_capabilities"
+    t.index ["capabilities"], name: "index_models_on_capabilities", using: :gin
     t.index ["family"], name: "index_models_on_family"
-    t.index ["modalities"], name: "index_models_on_modalities"
+    t.index ["modalities"], name: "index_models_on_modalities", using: :gin
     t.index ["provider", "model_id"], name: "index_models_on_provider_and_model_id", unique: true
     t.index ["provider"], name: "index_models_on_provider"
   end
@@ -118,7 +118,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_25_095659) do
   end
 
   create_table "tool_calls", force: :cascade do |t|
-    t.json "arguments", default: {}
+    t.jsonb "arguments", default: {}
     t.datetime "created_at", null: false
     t.bigint "message_id", null: false
     t.string "name", null: false
