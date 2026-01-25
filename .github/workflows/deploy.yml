@@ -149,7 +149,7 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: hschne
+          username: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
           password: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
 
       - name: Set Tag
@@ -166,8 +166,8 @@ jobs:
           labels: |
             "service=anonymous-location"
           tags: |
-            "hschne/anonymous-location:latest"
-            "hschne/anonymous-location:${{ steps.tag.outputs.tag }}"
+            "aaronkotch/melonised:latest"
+            "aaronkotch/melonised:${{ steps.tag.outputs.tag }}"
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -184,4 +184,5 @@ jobs:
         run: bundle exec kamal deploy --skip-push
         env:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          KAMAL_REGISTRY_USERNAME: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }} 
