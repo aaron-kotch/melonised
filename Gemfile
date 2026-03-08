@@ -73,4 +73,4 @@ gem "tailwindcss-rails", "~> 4.4"
 
 gem "hotwire-livereload", "~> 2.1", group: :development
 
-gem "ruby_llm", "~> 1.11"
+gem "ruby_llm", "~> 1.13"
